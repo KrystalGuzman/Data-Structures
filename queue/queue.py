@@ -90,16 +90,14 @@ class QueueFromStack(object):
         self.size += 1
 
     def dequeue(self):
-        if self.size > 0:
-            if self.out_stack.is_empty:
-                while self.in_stack.size()>0:
-                
-                    self.out_stack.push(self.in_stack.pop())
-                self.size -= 1
-            if not self.out_stack.is_empty:
-                return self.out_stack.items.pop()
-            else:
-                return None
+        if not self.in_stack.is_empty():
+            while self.in_stack.size() > 0:
+                self.out_stack.push(self.in_stack.pop())
+            res = self.out_stack.pop()
+            while self.out_stack.size() > 0:
+                self.in_stack.push(self.out_stack.pop())
+            self.size -= 1
+            return res
 
 
 
