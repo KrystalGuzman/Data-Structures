@@ -15,7 +15,6 @@ Stretch: What if you could only use instances of your Stack class to implement t
 """
 
 from singly_linked_list import LinkedList
-# from stack import Stack
 
 class QueueFromArray:
     def __init__(self):
@@ -37,22 +36,22 @@ class QueueFromArray:
 
             return first_in_line
 
-# class QueueFromLinkedList:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = LinkedList()
+class QueueFromLinkedList:
+    def __init__(self):
+        self.size = 0
+        self.storage = LinkedList()
     
-#     def __len__(self):
-#         return self.size
+    def __len__(self):
+        return self.size
 
-#     def enqueue(self, value):
-#         self.storage.add_to_tail(value)
-#         self.size += 1
+    def enqueue(self, value):
+        self.storage.add_to_tail(value)
+        self.size += 1
 
-#     def dequeue(self):
-#         if self.size > 0:
-#             self.size -= 1
-#             return self.storage.remove_head()
+    def dequeue(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_head()
 
 class Stack:
 
@@ -91,9 +90,12 @@ class QueueFromStack(object):
 
     def dequeue(self):
         if not self.in_stack.is_empty():
+            #takes off in_stack and puts onto out_stack
             while self.in_stack.size() > 0:
                 self.out_stack.push(self.in_stack.pop())
+            #removes value
             res = self.out_stack.pop()
+            #takes off out_stack and puts back onto in_stack
             while self.out_stack.size() > 0:
                 self.in_stack.push(self.out_stack.pop())
             self.size -= 1
@@ -101,23 +103,8 @@ class QueueFromStack(object):
 
 
 
-# class Queue(QueueFromArray):
+class Queue(QueueFromArray):
 # class Queue(QueueFromLinkedList):
-class Queue(QueueFromStack):
+# class Queue(QueueFromStack):
     def __init__(self):
         super().__init__()
-
-test = QueueFromArray()
-test.enqueue(16)
-test.enqueue(18)
-test.enqueue(105)
-print(test)
-test.dequeue()
-print(test)
-test.dequeue()
-print(test)
-test.dequeue()
-print(len(test))
-test.dequeue()
-print(len(test))
-test.dequeue()
