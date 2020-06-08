@@ -38,7 +38,7 @@ class StackFromLinkedList:
     def __len__(self):
         return self.size
 
-    # new items will be appended at head of existing list for easy access to the most recently added element
+    # new items will be appended at tail of existing list
     def push(self, value):
         self.storage.add_to_tail(value)
         self.size += 1
