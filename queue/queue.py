@@ -15,48 +15,111 @@ Stretch: What if you could only use instances of your Stack class to implement t
 """
 
 from singly_linked_list import LinkedList
-from stack import Stack
+# from stack import Stack
 
-# class QueueFromArray:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage =[]
-    
-#     def __len__(self):
-#         return self.size
-
-#     def enqueue(self, value):
-#         self.storage.append(value)
-#         self.size += 1
-
-#     def dequeue(self):
-#         if self.size > 0:
-#             first_in_line = self.storage[0]
-#             self.storage = self.storage[1:]
-#             self.size -= 1
-
-#             return first_in_line
-
-class QueueFromLinkedList:
+class QueueFromArray:
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.storage =[]
     
     def __len__(self):
         return self.size
 
     def enqueue(self, value):
-        self.storage.add_to_tail(value)
+        self.storage.append(value)
         self.size += 1
 
     def dequeue(self):
         if self.size > 0:
+            first_in_line = self.storage[0]
+            self.storage = self.storage[1:]
             self.size -= 1
-            return self.storage.remove_head()
+
+            return first_in_line
+
+# class QueueFromLinkedList:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
+    
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+#         self.storage.add_to_tail(value)
+#         self.size += 1
+
+#     def dequeue(self):
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.remove_head()
+
+class Stack:
+
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+    def is_empty(self):
+        return self.items == []
+
+class QueueFromStack(object):
+
+    def __init__(self):
+        self.size = 0
+        # Two Stacks
+        self.in_stack = Stack()
+        self.out_stack = Stack()
+
+    def __len__(self):
+        if self.size>0:
+            return self.size
+        else:
+            return 0
+
+    def enqueue(self, item):
+        self.in_stack.push(item)
+        self.size += 1
+
+    def dequeue(self):
+        if self.size > 0:
+            if self.out_stack.is_empty:
+                while self.in_stack.size()>0:
+                
+                    self.out_stack.push(self.in_stack.pop())
+                self.size -= 1
+            if not self.out_stack.is_empty:
+                return self.out_stack.items.pop()
+            else:
+                return None
+
 
 
 # class Queue(QueueFromArray):
-class Queue(QueueFromLinkedList):
-# class Queue(QueueFromStack):
+# class Queue(QueueFromLinkedList):
+class Queue(QueueFromStack):
     def __init__(self):
         super().__init__()
+
+test = QueueFromArray()
+test.enqueue(16)
+test.enqueue(18)
+test.enqueue(105)
+print(test)
+test.dequeue()
+print(test)
+test.dequeue()
+print(test)
+test.dequeue()
+print(len(test))
+test.dequeue()
+print(len(test))
+test.dequeue()
