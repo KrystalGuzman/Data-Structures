@@ -49,6 +49,8 @@ class QueueFromLinkedList:
         self.size += 1
 
     def dequeue(self):
+        if self.size == 0:
+            return None
         if self.size > 0:
             self.size -= 1
             return self.storage.remove_head()
@@ -100,11 +102,12 @@ class QueueFromStack(object):
                 self.in_stack.push(self.out_stack.pop())
             self.size -= 1
             return res
+        
 
 
 
-class Queue(QueueFromArray):
+# class Queue(QueueFromArray):
 # class Queue(QueueFromLinkedList):
-# class Queue(QueueFromStack):
+class Queue(QueueFromStack):
     def __init__(self):
         super().__init__()
