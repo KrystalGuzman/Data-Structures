@@ -140,7 +140,7 @@ class DoublyLinkedList:
         # delete and rewire prev and next pointers
         node.delete()
         # if this node happened to be the tail, move to the previous element
-       if not node.next:
+        if not node.next:
            self.tail = node.prev
         # update head pointer
         self.head.prev = node
