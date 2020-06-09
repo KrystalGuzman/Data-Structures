@@ -48,30 +48,107 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        new_head = ListNode(value)
+        self.length += 1
+        #current DLL is empty
+        if not self.head and not self.tail:
+            #set new nodes next pointer to old head
+            self.head = new_head
+            self.tail = new_head
+        else:
+            #points new node to existing head
+            new_head.next = self.head
+            #reassigns prev pointer of old head
+            new_head.next.prev = self.head
+            #reassigns pointer to new head
+            self.head = new_head
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        pass
+        # prevent trying to remove from an empty DLL
+        if not self.head:
+            return None
+        elif self.length == 1:
+            return_value = self.head.value
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return return_value
+        else:
+            removed_value = self.head
+            self.head = self.head.next
+            self.prev = None
+            self.length -= 1
+            return removed_value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        new_tail = ListNode(value)
+        self.length += 1
+        #current DLL is empty
+        if not self.tail and not self.head:
+            #set new nodes next pointer to old tail
+            self.head = new_tail
+            self.tail = new_tail
+        else:
+            #find current tail
+            current_tail = self.head
+            while current_tail.next:
+                current_tail = current_tail.next
+            #points to new ListNode
+            current_tail.next = new_tail
+            #reassigns prev pointer of old tail
+            current_tail.next.prev = current_tail
+            #reassigns pointer to new tail
+            self.tail = current_tail.next
+
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        #trying to remove from empty
+        if not self.head or not self.tail:
+            return
+        elif self.length == 1:
+            return_value = self.head.value
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return return_value
+        else:
+            # store current tail
+            removed_value = self.tail
+            # move current tail pointer
+            self.tail = self.tail.prev
+            # set second elem's pre pointer to None
+            self.tail.next = None
+            #decrease length by 1
+            self.length -= 1
+            return removed_value
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        # do nothing if there is only one element in the list or node is already the head
+        if self.length == 1 or node is self.head:
+            return
+        # delete and rewire prev and next pointers
+        node.delete()
+        # if this node happened to be the tail, move to the previous element
+       if not node.next:
+           self.tail = node.prev
+        # update head pointer
+        self.head.prev = node
+        # reassign as head of list
+        node.next = self.head
+        node.prev = None
+        # update head pointer
+        self.head = node
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
