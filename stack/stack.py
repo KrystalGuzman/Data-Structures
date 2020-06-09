@@ -12,23 +12,24 @@ return elements in Last In First Out order.
 """
 from singly_linked_list import LinkedList
 
-# class StackFromArray:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = []
+class StackFromArray:
+    def __init__(self):
+        self.size = 0
+        self.storage = []
 
-#     def __len__(self):
-#         return self.size
+    def __len__(self):
+        return self.size
 
-#     def push(self, value):
-#         self.storage.append(value)
-#         self.size += 1
+    def push(self, value):
+        self.storage.append(value)
+        self.size += 1
 
-#     def pop(self):
-
-#         if self.size > 0:
-#             self.size -= 1
-#             return self.storage.pop()
+    def pop(self):
+        if self.size == 0:
+            return None
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.pop()
 
 class StackFromLinkedList:
     def __init__(self):
@@ -49,7 +50,7 @@ class StackFromLinkedList:
             self.size -= 1
             return self.storage.remove_tail()
 
-class Stack(StackFromLinkedList):
-# class Stack(StackFromArray):
+# class Stack(StackFromLinkedList):
+class Stack(StackFromArray):
     def __init__(self):
         super().__init__()
