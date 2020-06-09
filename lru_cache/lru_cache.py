@@ -22,11 +22,10 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-
         # key not in dictionary
         if key not in self.storage:
             return None
-        
+            
         # move value to end of list
         # return the requested value
         else:
@@ -45,29 +44,24 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-
         # if the key exists in the cache, update the old entry
         if key in self.storage:
-
             # update existing value in existing
             existing = self.storage[key]
             data = dict()
             data[key] = value
             existing.value = data
-            
             # point to the updated, most-recent-used value
             self.cache.move_to_end(existing)
 
         # key doesn't exist in the cache yet
         else:
-
             # if the cache is full, remove the least recent used value from the cache
             # also remove the key from the dictionary
-            if len(self.cache) == self.limit:
 
+            if len(self.cache) == self.limit:
                 data_remove = self.cache.remove_from_head().value
                 key_remove = [*data_remove][0]
-                
                 del self.storage[key_remove]
 
             # add to the most-recent-used spot (tail end)
@@ -75,6 +69,5 @@ class LRUCache:
             data = dict()
             data[key] = value
             self.cache.add_to_tail(data)
-
             # add the new key to the dictionary.
             self.storage[key] = self.cache.tail
