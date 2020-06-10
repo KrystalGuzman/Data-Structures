@@ -77,20 +77,23 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
     def remove_from_head(self):
         # prevent trying to remove from an empty DLL
-        if not self.head:
-            return None
-        elif self.length == 1:
-            return_value = self.head.value
-            self.head = None
-            self.tail = None
-            self.length -= 1
-            return return_value
-        else:
-            removed_value = self.head
-            self.head = self.head.next
-            self.prev = None
-            self.length -= 1
-            return removed_value
+        # if not self.head:
+        #     return None
+        # elif self.length == 1:
+        #     return_value = self.head.value
+        #     self.head = None
+        #     self.tail = None
+        #     self.length -= 1
+        #     return return_value
+        # else:
+        #     removed_value = self.head
+        #     self.head = self.head.next
+        #     self.prev = None
+        #     self.length -= 1
+        #     return removed_value
+        value = self.head.value
+        self.delete(self.head)
+        return value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
@@ -121,24 +124,27 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
     def remove_from_tail(self):
         #trying to remove from empty
-        if not self.head or not self.tail:
-            return
-        elif self.length == 1:
-            return_value = self.head.value
-            self.head = None
-            self.tail = None
-            self.length -= 1
-            return return_value
-        else:
-            # store current tail
-            removed_value = self.tail
-            # move current tail pointer
-            self.tail = self.tail.prev
-            # set second elem's pre pointer to None
-            self.tail.next = None
-            #decrease length by 1
-            self.length -= 1
-            return removed_value
+        # if not self.head or not self.tail:
+        #     return
+        # elif self.length == 1:
+        #     return_value = self.head.value
+        #     self.head = None
+        #     self.tail = None
+        #     self.length -= 1
+        #     return return_value
+        # else:
+        #     # store current tail
+        #     removed_value = self.tail
+        #     # move current tail pointer
+        #     self.tail = self.tail.prev
+        #     # set second elem's pre pointer to None
+        #     self.tail.next = None
+        #     #decrease length by 1
+        #     self.length -= 1
+        #     return removed_value
+        value = self.tail.value
+        self.delete(self.tail)
+        return value
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
