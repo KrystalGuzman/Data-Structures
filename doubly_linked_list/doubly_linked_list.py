@@ -107,16 +107,20 @@ class DoublyLinkedList:
             self.head = new_tail
             self.tail = new_tail
         else:
-            #find current tail
-            current_tail = self.head
-            while current_tail.next:
-                current_tail = current_tail.next
-            #points to new ListNode
-            current_tail.next = new_tail
-            #reassigns prev pointer of old tail
-            current_tail.next.prev = current_tail
-            #reassigns pointer to new tail
-            self.tail = current_tail.next
+            # #find current tail
+            # current_tail = self.head
+            # while current_tail.next:
+            #     current_tail = current_tail.next
+            # #points to new ListNode
+            # current_tail.next = new_tail
+            # #reassigns prev pointer of old tail
+            # current_tail.next.prev = current_tail
+            # #reassigns pointer to new tail
+            # self.tail = current_tail.next
+
+            new_tail.prev = self.tail
+            self.tail.next = new_tail
+            self.tail = new_tail
 
 
     """Removes the List's current tail node, making the 
