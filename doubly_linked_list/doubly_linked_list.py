@@ -160,6 +160,7 @@ class DoublyLinkedList:
         node.delete()
         # if this node happened to be the tail, move to the previous element
         if not node.next:
+        #if node.next is None:
            self.tail = node.prev
         # update head pointer
         self.head.prev = node
@@ -179,6 +180,7 @@ class DoublyLinkedList:
         node.delete()
         # if node is head, move to next element
         if not node.prev:
+        #if node is self.head:
             self.head = node.next
         #  update tail pointer to point to new element
         self.tail.next = node
