@@ -1,6 +1,8 @@
 from doubly_linked_list import DoublyLinkedList
 
 class LRUCache:
+    # example: browser - stores information in cache and when navigate to other page,
+    # loads new info and can go back and reloads information
     """
     Our LRUCache class keeps track of the max number of nodes it
     can hold, the current number of nodes it is holding, a doubly-
