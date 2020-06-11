@@ -25,11 +25,12 @@ class StackFromArray:
         self.size += 1
 
     def pop(self):
-        if self.size == 0:
-            return None
+
         if self.size > 0:
             self.size -= 1
             return self.storage.pop()
+        else:
+            return self.storage == []
 
 class StackFromLinkedList:
     def __init__(self):
@@ -49,6 +50,7 @@ class StackFromLinkedList:
         if self.size > 0:
             self.size -= 1
             return self.storage.remove_tail()
+    
 
 # class Stack(StackFromLinkedList):
 class Stack(StackFromArray):
